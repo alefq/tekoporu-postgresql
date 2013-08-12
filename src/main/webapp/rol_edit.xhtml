@@ -1,0 +1,54 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{rolEditMB.insert}"
+						rendered="#{!rolEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{rolEditMB.update}"
+						rendered="#{rolEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{rolEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{rolEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['rol.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fields" columns="3">
+					
+					<h:outputLabel value="#{messages['rol.label.rolId']}: " for="rolId" styleClass="text-input" />
+					<h:outputText id="rolId" value="#{rolEditMB.bean.rolId}" />
+					<p:message for="rolId" />
+					
+					<h:outputLabel value="#{messages['rol.label.nombre']}: " for="nombre" styleClass="text-input" />
+					<h:inputText id="nombre" value="#{rolEditMB.bean.nombre}"
+						title="#{messages['rol.alt.nombre']}" />
+					<p:message for="nombre" />
+					
+					<h:outputLabel value="#{messages['rol.label.rolPermisos']}: " for="rolPermisos" styleClass="text-input" />
+					<h:inputText id="rolPermisos" value="#{rolEditMB.bean.rolPermisos}"
+						title="#{messages['rol.alt.rolPermisos']}" />
+					<p:message for="rolPermisos" />
+					
+					<h:outputLabel value="#{messages['rol.label.usuarioRols']}: " for="usuarioRols" styleClass="text-input" />
+					<h:inputText id="usuarioRols" value="#{rolEditMB.bean.usuarioRols}"
+						title="#{messages['rol.alt.usuarioRols']}" />
+					<p:message for="usuarioRols" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
