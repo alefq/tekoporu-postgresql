@@ -25,13 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -42,14 +42,15 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.log4j.Level;
 import org.hibernate.annotations.Formula;
+import org.slf4j.Logger;
 
 import py.gov.setics.registro.exception.RegistroException;
 
 public class BolsaUtil {
 
 	public static final String FECHA_HASTA_SUFIJO = "_hasta";
-	protected static org.apache.log4j.Logger log = org.apache.log4j.Logger
-			.getLogger(BolsaUtil.class);
+	@Inject
+	static Logger log;
 	public static final Map<Class<?>, Comparator<?>> reverseOrdersMap = new HashMap<Class<?>, Comparator<?>>();
 	public static final Map<Class<?>, Comparator<?>> ascendingOrdersMap = new HashMap<Class<?>, Comparator<?>>();
 	public static final Boolean ORDEN_ASCENDENTE = Boolean.TRUE;
@@ -146,25 +147,7 @@ public class BolsaUtil {
 	public static Comparator<?> getAscendingOrder(Class<?> clazz) {
 		return ascendingOrdersMap.get(clazz);
 	}
-
-	/**
-	 * Retorna si un producto es un bien o un servicio de acuerdo al c�digo ya
-	 * que seg�n el banco mundial los productos menores al c�digo 7000000 son
-	 * bienes y el resto servicios
-	 * 
-	 * @param codigo
-	 * @return
-	 */
-	public static String getTipoProductoN4(String codigo) {
-		Integer codigoInt = Integer.parseInt(codigo);
-		if (codigoInt >= 10000000 && codigoInt <= 69999999)
-			return "B";
-		else if (codigoInt >= 70000000 && codigoInt <= 99999999)
-			return "S";
-		else
-			return "ERROR";
-	}
-
+	
 	public static boolean isTransient(Class<?> clazz, String property) {
 		boolean ret = false;
 		String key = clazz.getName() + "." + property;
@@ -563,16 +546,6 @@ public class BolsaUtil {
 		return ret;
 	}
 
-	public static boolean isCodigoCatalogo(String codigoTitulo) {
-		boolean ret = false;
-		String regex = "[0-9]{8}(\\-[0-9]{3})*";
-		String regex4digitosN5 = "[0-9]{8}(\\-[0-9]{4})*";
-		ret = !isBlank(codigoTitulo)
-				&& (Pattern.matches(regex, codigoTitulo) || Pattern.matches(
-						regex4digitosN5, codigoTitulo));
-		return ret;
-	}
-
 	/**
 	 * Devuelve la permutación de los criterios para ser usados en sentencias de
 	 * like o ilike
@@ -692,31 +665,6 @@ public class BolsaUtil {
 
 	public static byte[] getDefaultKey() {
 		return defaultKey;
-	}
-
-	/**
-	 * M�todo que crea un mapa clave,valor a partir de los pares
-	 * nombreAtributo:tipoDato:valor existentes en el string que se recibe como
-	 * par�metro. Ej. Para el string "nombreAtributo:tipoDato:valor",
-	 * nombreAtributo ser� key y valor sera el value de ese key en el mapa.
-	 * 
-	 * @param stringData
-	 *            : parametro que tiene el formato
-	 *            "nombre1:tipoDato:valor1,nombre2:tipoDato:valor2,..."
-	 * @return
-	 */
-	public static Map<String, Object> getMapFromStringData(String stringData) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String[] pares = stringData.split(",");
-		for (String par : pares) {
-			String[] claveValor = par.split(":");
-			// Pongo solo el nombre del key y el valor (el parametro 1 es el
-			// tipo)
-			if (claveValor.length == 3) {
-				map.put(claveValor[0], claveValor[2]);
-			}
-		}
-		return map;
 	}
 
 	public String getRemoteAddress() {

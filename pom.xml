@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>py.gov.setics</groupId>
-	<artifactId>registro</artifactId>
+	<artifactId>tekoporu-postgresl</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>registro</name>
+	<name>tekoporu-postgresl</name>
 	<description>Ejemplo de aplicación con conexión a PostgreSQL</description>
 	<url></url>
 
@@ -26,9 +27,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.ticpy.tekoporu</groupId>
-		    <artifactId>tekoporu-jta</artifactId>
-		    <scope>compile</scope>
+			<groupId>org.ticpy.tekoporu</groupId>
+			<artifactId>tekoporu-jta</artifactId>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>
@@ -55,6 +56,12 @@
 			<artifactId>urlrewritefilter</artifactId>
 			<version>4.0.3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<repositories>
@@ -63,5 +70,5 @@
 			<url>http://maven.ticpy.org/repository/release</url>
 		</repository>
 	</repositories>
-	
+
 </project>

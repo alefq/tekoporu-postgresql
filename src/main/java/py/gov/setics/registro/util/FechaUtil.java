@@ -6,10 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+
 public class FechaUtil {
 
-	protected static org.apache.log4j.Logger log = org.apache.log4j.Logger
-			.getLogger(FechaUtil.class);
+	@Inject
+	static Logger log;
 
 	public static Date desplazarFecha(java.util.Date pFecha, Integer segundos,
 			Integer minutos, Integer horas, Integer pDias, Integer pMeses,
