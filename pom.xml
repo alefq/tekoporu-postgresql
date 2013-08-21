@@ -70,12 +70,13 @@
 
 	</dependencies>
 
-	<repositories>
+<!--	<repositories>
 		<repository>
 			<id>maven.ticpy.org</id>
 			<url>http://maven.ticpy.org/repository/release</url>
 		</repository>
 	</repositories>
+-->
 
 	<build>
 	  <plugins>
