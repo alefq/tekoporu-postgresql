@@ -6,11 +6,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>py.gov.setics</groupId>
-	<artifactId>tekoporu-postgresl</artifactId>
+	<artifactId>tekoporu-postgresql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>tekoporu-postgresl</name>
+	<name>tekoporu-postgresql</name>
 	<description>Ejemplo de aplicación con conexión a PostgreSQL</description>
 	<url></url>
 
