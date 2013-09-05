@@ -1,6 +1,7 @@
 package py.gov.setics.registro.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -48,6 +51,10 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
 	private String nombre;
 
 	private String salt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="fecha_ultimo_cambio_contrasenha", insertable=false)
+	private Date fechaUltimoCambioContrasenha;
 
 	// bi-directional many-to-one association to UsuarioRol
 	@OneToMany(mappedBy = "usuario")
@@ -122,6 +129,15 @@ public class Usuario extends BaseEntity<Long> implements Serializable {
 	@Override
 	public Long getId() {
 		return getUsuarioId();
+	}
+
+	public Date getFechaUltimoCambioContrasenha() {
+		return fechaUltimoCambioContrasenha;
+	}
+
+	public void setFechaUltimoCambioContrasenha(
+			Date fechaUltimoCambioContrasenha) {
+		this.fechaUltimoCambioContrasenha = fechaUltimoCambioContrasenha;
 	}
 
 }
