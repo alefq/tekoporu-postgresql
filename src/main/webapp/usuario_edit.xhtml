@@ -1,58 +1,81 @@
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/main.xhtml">
 
 	<ui:define name="body">
 		<h:form prependId="false">
 
 			<p:toolbar>
 				<p:toolbarGroup align="left">
-					<p:commandButton value="#{messages['button.save']}" action="#{usuarioEditMB.insert}"
+					<p:commandButton value="#{messages['button.save']}"
+						action="#{usuarioEditMB.insert}"
 						rendered="#{!usuarioEditMB.updateMode}" ajax="false" />
-					<p:commandButton value="#{messages['button.save']}" action="#{usuarioEditMB.update}"
+					<p:commandButton value="#{messages['button.save']}"
+						action="#{usuarioEditMB.update}"
 						rendered="#{usuarioEditMB.updateMode}" ajax="false" />
-					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
-						rendered="#{usuarioEditMB.updateMode}" type="button" immediate="true" ajax="false" />
-					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
-						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
-						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{usuarioEditMB.delete}" immediate="true"
-							ajax="false" />
-						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					<p:commandButton value="#{messages['button.delete']}"
+						onclick="confirmation.show()"
+						rendered="#{usuarioEditMB.updateMode}" type="button"
+						immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}"
+						showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert"
+						widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}"
+							action="#{usuarioEditMB.delete}" immediate="true" ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}"
+							onclick="confirmation.hide()" type="button" />
 					</p:confirmDialog>
+					<p:commandButton value="Guardar con error adrede"
+						action="#{usuarioEditMB.insertWithError}"
+						rendered="#{!usuarioEditMB.updateMode}" ajax="false" />
 				</p:toolbarGroup>
 			</p:toolbar>
 
 			<br />
 
-			<p:fieldset legend="#{messages['usuario.label']}" toggleable="true" toggleSpeed="500">
+			<p:fieldset legend="#{messages['usuario.label']}" toggleable="true"
+				toggleSpeed="500">
 				<h:panelGrid id="fields" columns="3">
-					
-					<h:outputLabel value="#{messages['usuario.label.usuarioId']}: " for="usuarioId" styleClass="text-input" />
-					<h:outputText id="usuarioId" value="#{usuarioEditMB.bean.usuarioId}" />
+
+					<h:outputLabel value="#{messages['usuario.label.usuarioId']}: "
+						for="usuarioId" styleClass="text-input" />
+					<h:outputText id="usuarioId"
+						value="#{usuarioEditMB.bean.usuarioId}" />
 					<p:message for="usuarioId" />
-					
-					<h:outputLabel value="#{messages['usuario.label.clavePrivada']}: " for="clavePrivada" styleClass="text-input" />
-					<h:inputText id="clavePrivada" value="#{usuarioEditMB.bean.clavePrivada}"
+
+					<h:outputLabel value="#{messages['usuario.label.clavePrivada']}: "
+						for="clavePrivada" styleClass="text-input" />
+					<h:inputText id="clavePrivada"
+						value="#{usuarioEditMB.bean.clavePrivada}"
 						title="#{messages['usuario.alt.clavePrivada']}" />
 					<p:message for="clavePrivada" />
-					
-					<h:outputLabel value="#{messages['usuario.label.clavePublica']}: " for="clavePublica" styleClass="text-input" />
-					<h:inputText id="clavePublica" value="#{usuarioEditMB.bean.clavePublica}"
+
+					<h:outputLabel value="#{messages['usuario.label.clavePublica']}: "
+						for="clavePublica" styleClass="text-input" />
+					<h:inputText id="clavePublica"
+						value="#{usuarioEditMB.bean.clavePublica}"
 						title="#{messages['usuario.alt.clavePublica']}" />
 					<p:message for="clavePublica" />
-					
-					<h:outputLabel value="#{messages['usuario.label.contrasenha']}: " for="contrasenha" styleClass="text-input" />
-					<h:inputText id="contrasenha" value="#{usuarioEditMB.bean.contrasenha}"
+
+					<h:outputLabel value="#{messages['usuario.label.contrasenha']}: "
+						for="contrasenha" styleClass="text-input" />
+					<h:inputText id="contrasenha"
+						value="#{usuarioEditMB.bean.contrasenha}"
 						title="#{messages['usuario.alt.contrasenha']}" />
 					<p:message for="contrasenha" />
-					
-					<h:outputLabel value="#{messages['usuario.label.nombre']}: " for="nombre" styleClass="text-input" />
+
+					<h:outputLabel value="#{messages['usuario.label.nombre']}: "
+						for="nombre" styleClass="text-input" />
 					<h:inputText id="nombre" value="#{usuarioEditMB.bean.nombre}"
 						title="#{messages['usuario.alt.nombre']}" />
 					<p:message for="nombre" />
 
-						
+
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>

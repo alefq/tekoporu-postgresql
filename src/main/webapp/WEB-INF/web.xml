@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 
- 	<!-- If you are using tomcat6/tomcat7 then uncomment this listener -->
- 	<!--
-	<listener>
-		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
-	</listener>
- 	-->
+	<!-- If you are using tomcat6/tomcat7 then uncomment this listener -->
+	<!-- <listener> <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class> 
+		</listener> -->
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -48,7 +46,7 @@
 		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
 	<!-- *** FIN Autenticacion con tekoporu-shiro *** -->
-	
+
 	<security-constraint>
 		<display-name>Restrict raw XHTML Documents</display-name>
 		<web-resource-collection>
@@ -57,5 +55,10 @@
 		</web-resource-collection>
 		<auth-constraint />
 	</security-constraint>
-	
+
+	<context-param>
+		<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 </web-app>

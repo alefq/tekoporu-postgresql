@@ -58,4 +58,8 @@ public class UsuarioBC extends DelegateCrud<Usuario, Long, UsuarioDAO> {
 		super.update(usuario);
 	}
 
+	public void insertWithError(Usuario bean) {
+		getDelegate().insertWithError(bean);
+	}
+
 }
